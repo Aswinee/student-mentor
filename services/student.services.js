@@ -158,15 +158,11 @@ const service = {
     }
   },
 
-  //Function to change mentor of a student
   changeMentor(id, newData) {
     let flag = true;
     let output = {};
     let message = "";
     let selectedStudent = data[0].students.filter((s) => s.id == id);
-    let selectedMentor = data[1].mentors.filter((m) => {
-      return m.name == newData.mentor;
-    });
 
     //Checking if Student already has this mentor
     if (selectedStudent[0].mentor == newData.mentor) {
@@ -175,20 +171,34 @@ const service = {
     }
 
     if (flag) {
+      for (let i in data[1].mentors) {
+        //Removing the selected student from any other mentor if it existed.
+        if (data[1].mentors[i].name == selectedStudent[0].mentor) {
+          const index = data[1].mentors[i].studs.indexOf(
+            selectedStudent[0].name
+          );
+          if (index > -1) {
+            data[1].mentors[i].studs.splice(index, 1);
+          }
+        }
+      }
       //Updating students
       for (let i in data[0].students) {
         if (data[0].students[i].id == id) {
-          console.log("inside if");
           data[0].students[i].mentor = newData.mentor;
           output = data[0].students[i];
         }
       }
-      //Updating mentor
+
+      //Updating mentors list
       for (let i in data[1].mentors) {
+        //Adding selected student to selected mentor
         if (data[1].mentors[i].name == newData.mentor) {
           data[1].mentors[i].studs.push(selectedStudent[0].name);
+          console.log(data[1].mentors[i]);
         }
       }
+
       return output;
     } else {
       return { error: message };
