@@ -24,7 +24,7 @@ let data = [
       },
       {
         name: "S5",
-        Mentor: "M3",
+        mentor: "M3",
         id: 5,
       },
       {
