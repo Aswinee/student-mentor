@@ -148,7 +148,7 @@ const service = {
       //Updating students
       for (let i in data[0].students) {
         if (data[0].students[i].name == newData.student) {
-          data[0].students[i].mentor = selectedMentor.name;
+          data[0].students[i].mentor = selectedMentor[0].name;
         }
       }
       console.log(output);
@@ -186,7 +186,7 @@ const service = {
       //Updating mentor
       for (let i in data[1].mentors) {
         if (data[1].mentors[i].name == newData.mentor) {
-          data[1].mentors[i].studs.push(selectedStudent.name);
+          data[1].mentors[i].studs.push(selectedStudent[0].name);
         }
       }
       return output;
