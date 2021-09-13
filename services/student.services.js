@@ -64,6 +64,9 @@ const service = {
   displayMentors() {
     return data[1].mentors;
   },
+  displayMentor(id) {
+    return data[1].mentors[id - 1];
+  },
 
   //To create STUDENT
   createStudent(newData) {
