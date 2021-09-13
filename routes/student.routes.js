@@ -13,6 +13,11 @@ router.get("/mentors", async (req, res) => {
   const mentors = await studentService.displayMentors();
   res.send(mentors);
 });
+// READ
+router.get("/mentor/:id", async (req, res) => {
+  const mentors = await studentService.displayMentor(req.params.id);
+  res.send(mentors);
+});
 //Create student
 router.post("/students", (req, res) => {
   const student = studentService.createStudent(req.body);
